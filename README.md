@@ -1,15 +1,43 @@
-This is a project that aims to build a question answering model using the SQuAD (Stanford Question Answering Dataset) dataset. The model will be able to answer questions based on a given passage of text, similar to how humans comprehend text and answer questions.
+# SQuAD Project - Question Answering with Transformers
 
-**Dataset**
+## Overview
+This project utilizes the **Stanford Question Answering Dataset (SQuAD)** to train a **DistilBERT-based** model for question-answering tasks. The project preprocesses the dataset, tokenizes input data, and prepares it for fine-tuning using **Hugging Face's Transformers** library.
 
-The SQuAD dataset contains a set of Wikipedia articles with corresponding question-answer pairs. The dataset is split into two sets: train-v1.1.json and dev-v1.1.json. The former is used for training the model, while the latter is used for evaluating the model's performance.
+## Features
+- Loads and processes the SQuAD dataset using **datasets.load_dataset**.
+- Utilizes **DistilBERT** tokenizer for encoding questions and context.
+- Implements sliding window tokenization to handle long contexts.
+- Extracts start and end positions for answer span detection.
+- Prepares the dataset for model fine-tuning.
 
-**Model Architecture**
+## Requirements
+Install the necessary dependencies using:
+```bash
+pip install transformers datasets
+```
 
-The model architecture used in this project is a variant of the BERT (Bidirectional Encoder Representations from Transformers) model. BERT is a pre-trained language model that has shown impressive performance in various NLP tasks, including question answering.
+## Dataset
+- The dataset used is **SQuAD (Stanford Question Answering Dataset)**.
+- It consists of paragraphs of text with corresponding **questions and answers**.
+- Answers are extracted from specific spans within the provided context.
 
-The BERT model is first fine-tuned on the SQuAD dataset using the train-v1.1.json file. Once the model is trained, it is evaluated on the dev-v1.1.json file. The model's performance is measured using the F1 score and exact match score.
+## Tokenization and Preprocessing
+- Tokenization is performed using **DistilBERT tokenizer**.
+- Handles long contexts using **truncation and sliding window approaches**.
+- Maps original character positions of answers to token positions.
 
-**Conclusion**
+## How to Run
+1. Install required dependencies.
+2. Load the SQuAD dataset using `datasets.load_dataset("squad")`.
+3. Tokenize and preprocess the dataset using **DistilBERT tokenizer**.
+4. Prepare tokenized datasets with start and end token positions.
+5. Fine-tune a **transformer model** for question answering (not included in this script but can be done using Hugging Face's Trainer API).
 
-In this project, we built a question answering model using the SQuAD dataset and a variant of the BERT model. The model is able to answer questions based on a given passage of text and has achieved a high F1 score and exact match score on the evaluation set.
+## Output
+- Tokenized dataset ready for fine-tuning.
+- Mapped answer positions in tokenized input.
+- Processed dataset with overflow tokens and offsets for better context handling.
+
+## License
+This project is intended for educational and research purposes only. The dataset is publicly available under the SQuAD dataset license.
+
